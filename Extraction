@@ -23,3 +23,15 @@ query = 'from:Mcdonalds -is:retweet'
 tweets = client.search_recent_tweets(query=query, 
                                     tweet_fields=['author_id', 'created_at'],
                                      max_results=100)
+                                     
+ search_query = "@Mcdonalds -filter:retweets"
+ 
+ # Define query
+query = 'from:Mcdonalds -is:retweet'
+
+# get max. 10 tweets
+tweets = client.search_recent_tweets(query=query, 
+                                    tweet_fields=['author_id', 'created_at'],
+                                     max_results=100)
+                                     
+df
