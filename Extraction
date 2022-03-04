@@ -33,5 +33,11 @@ query = 'from:Mcdonalds -is:retweet'
 tweets = client.search_recent_tweets(query=query, 
                                     tweet_fields=['author_id', 'created_at'],
                                      max_results=100)
-                                     
-df
+# Save data as dictionary
+tweets_dict = tweets.json() 
+
+# Extract "data" value from dictionary
+tweets_data = tweets_dict['data'] 
+
+# Transform to pandas Dataframe
+df = pd.json_normalize(tweets_data)
