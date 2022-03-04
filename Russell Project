@@ -1,0 +1,38 @@
+import sys
+import operator
+import requests
+import json
+import twitter
+
+import tweepy
+import time
+import requests
+import pandas as pd
+
+consumer_key = 'Your Consumer Key'
+consumer_secret = 'Your Consumer Secret'
+access_token = 'Your Access Token'
+access_secret = 'Your Access Secret'
+bearer_token = 'Your Bearer Token'
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_secret)
+api = tweepy.API(auth,wait_on_rate_limit=True)
+
+num_tweets = 200
+tweets = []
+likes = []
+time = []
+retweets = []
+
+search_word = str(input(" "))
+
+for t in tweepy.Cursor (api.search_tweets, q= search_word, result_type = ['popular'], lang = 'en',tweet_mode='extended').items(num_tweets):
+    tweets.append(t.full_text)
+    likes.append(t.favorite_count)
+    time.append(t.created_at)
+    retweets.append(t.retweet_count)
+    
+df = pd.DataFrame({'tweets':tweets, 'likes':likes,'retweets':retweets, 'time':time})
+
+df.sort_values("likes",ascending=False)
