@@ -41,3 +41,5 @@ tweets_data = tweets_dict['data']
 
 # Transform to pandas Dataframe
 df = pd.json_normalize(tweets_data)
+
+df
