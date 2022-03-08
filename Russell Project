@@ -38,3 +38,5 @@ for t in tweepy.Cursor (api.search_tweets, q= search_word, result_type = ['popul
 df = pd.DataFrame({'tweets':tweets, 'likes':likes,'retweets':retweets, 'time':time})
 
 df.sort_values("likes",ascending=False)
+
+df.to_sql(con=my_conn,name='TableName',if_exists='replace',index=False)
