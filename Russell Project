@@ -8,6 +8,8 @@ import tweepy
 import time
 import requests
 import pandas as pd
+from sqlalchemy import create_engine
+my_conn = create_engine("mysql+mysqldb://root:""@localhost/solutions")
 
 consumer_key = 'Your Consumer Key'
 consumer_secret = 'Your Consumer Secret'
