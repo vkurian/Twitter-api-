@@ -1,0 +1,6 @@
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+analyzer = SentimentIntensityAnalyzer()
+for tweet in tweets:
+    vs = analyzer.polarity_scores(tweet)
+    print("{:-<65} {}".format(tweet, str(vs)))
