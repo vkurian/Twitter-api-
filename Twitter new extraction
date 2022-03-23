@@ -1,0 +1,58 @@
+import sys
+import operator
+import requests
+import json
+import twitter
+
+import tweepy
+import time
+import requests
+import pandas as pd
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+consumer_key = 'EpGEps3HQU0Em9GRQ611680cl'
+consumer_secret = 'oBA8gFEqbPhoPHuGWWhkg15IyW5TUjlk3X7a1Kbx39BhBr7lBb'
+access_token = '1493363962716508163-qir2LakyYEv8Fxubdhbvj9Q1ORDoVq'
+access_secret = 'WjjQEo0f78rSLXDVDdLDjRPGuvD9VnbbRFMxMay3YuBXH'
+bearer_token = 'AAAAAAAAAAAAAAAAAAAAABuJZQEAAAAAhcrrEQmNAMxGipN773v2X0b939g%3DZ4R2y26ikjPeFVDmcX6eN73R36xqHJlOvvmKPvrGYd4xQ8zTI3'
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_secret)
+api = tweepy.API(auth,wait_on_rate_limit=True)
+
+num_tweets = 200
+tweets = []
+likes = []
+time = []
+retweets = []
+
+for t in tweepy.Cursor (api.search_tweets, q= "Mcdonalds", result_type = ['popular'], lang = 'en',tweet_mode='extended').items(num_tweets):
+    tweets.append(t.full_text)
+    likes.append(t.favorite_count)
+    time.append(t.created_at)
+    retweets.append(t.retweet_count)
+    #vs = analyzer.polarity_scores(tweets)
+    #scores.append(vs)
+    #print("{:-<65} {}".format(tweet, str(vs)))
+    
+df = pd.DataFrame({'tweets':tweets, 'likes':likes,'retweets':retweets, 'time':time})
+
+df.sort_values("likes",ascending=False)
+
+
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+analyzer = SentimentIntensityAnalyzer()
+scores = []
+for tweet in tweets:
+    vs = analyzer.polarity_scores(tweet)
+    scores.append(vs)
+    print("{:-<65} {}".format(tweet, str(vs)))
+    
+    
+data = pd.DataFrame(scores)
+final_dataset= pd.concat([df,data2], axis=1)
+
+final_dataset.sort_values("likes" or "compound",ascending=False)
+    
+    
