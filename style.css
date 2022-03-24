@@ -1,0 +1,16 @@
+@media(max-width: 768px){
+  .mainMenu{
+    display: none;
+  }
+  .mainMenu.toggleCls{
+    display: block;
+  }
+}
+@media(min-width: 769px){
+  .hamIcon{
+    display: none;
+  }
+  .mainMenu{
+    display: initial;
+  }
+}
