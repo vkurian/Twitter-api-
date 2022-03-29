@@ -51,7 +51,7 @@ for tweet in tweets:
     
     
 data = pd.DataFrame(scores)
-final_dataset= pd.concat([df,data2], axis=1)
+final_dataset= pd.concat([df,data], axis=1)
 
 final_dataset.sort_values("likes" or "compound",ascending=False)
     
