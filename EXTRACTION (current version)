@@ -3,6 +3,7 @@ import operator
 import requests
 import json
 import twitter
+import datetime
 
 import tweepy
 import time
@@ -27,12 +28,19 @@ likes = []
 time = []
 retweets = []
 
-# the "until = 'date' will make it so we can gather tweets from that date till now WE CAN ONLY GO BACK 7 DAYS
+# this allows us to set the time to the exact time the code is being ran, and itll automatically go back 7 days for us without inputting the new date everytime
+today = datetime.datetime.now()
+today = today.replace(hour=23, minute=59, second=59, microsecond=999999) # set from the beggining of the day
+time_to_the_past = 7 # 7 because we want a week before today
+week = today - datetime.timedelta(time_to_the_past) 
+next_day = week + datetime.timedelta(time_to_the_past) 
+
+# the "until = 'date' will make it so we can gather tweets from that date till now ; WE CAN ONLY GO BACK 7 DAYS
 for t in tweepy.Cursor (api.search_tweets,
                         q= "Mcdonalds",
                         result_type = ['popular'],
                         lang = 'en',
-                        until = '2022-03-23',
+                        until = next_day.date(),
                         tweet_mode='extended').items(num_tweets):
     tweets.append(t.full_text)
     likes.append(t.favorite_count)
