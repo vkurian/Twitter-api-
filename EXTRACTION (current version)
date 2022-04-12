@@ -22,7 +22,7 @@ auth.set_access_token(access_token, access_secret)
 api = tweepy.API(auth,wait_on_rate_limit=True)
 
 #we can change number of tweets to whatever you need
-num_tweets = 1000
+num_tweets = 100
 tweets = []
 likes = []
 time = []
