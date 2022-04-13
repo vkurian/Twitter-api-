@@ -1,12 +1,20 @@
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 analyzer = SentimentIntensityAnalyzer()
+scores = []
 for tweet in tweets:
     vs = analyzer.polarity_scores(tweet)
+    scores.append(vs)
     print("{:-<65} {}".format(tweet, str(vs)))
     
-data = pd.DataFrame(tweets, columns= ['Tweets'])
-data2 = pd.DataFrame(scores)
-final_dataset= pd.concat([data,data2], axis=1)
+    if vs['compound'] >= 0.05 :
+        print("Positive")
+    elif vs['compound'] <= - 0.05 :
+        print("Negative")
+    else :
+        print("Neutral") 
+    
+data = pd.DataFrame(scores)
+final_dataset= pd.concat([df,data], axis=1)
 
-final_dataset
+final_dataset.sort_values("likes" or "compound",ascending=False)
