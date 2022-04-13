@@ -10,6 +10,5 @@ for t in tweepy.Cursor (api.search_tweets,
                         q= "Mcdonalds",
                         result_type = ['popular'],
                         lang = 'en',
-                        until = '2022-03-23',
                         until = next_day.date(),
                         tweet_mode='extended').items(num_tweets):
