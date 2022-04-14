@@ -31,7 +31,7 @@ retweets = []
 
 # the "until = 'date' will make it so we can gather tweets from that date till now ; WE CAN ONLY GO BACK 7 DAYS
 for t in tweepy.Cursor (api.search_tweets,
-                        q= "Mcdonalds",
+                        q= "Mcdonalds -filter:retweets",
                         result_type = ['popular'],
                         lang = 'en',
                         tweet_mode='extended').items(num_tweets):
