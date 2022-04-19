@@ -56,6 +56,14 @@ for tweet in tweets:
     scores.append(vs)
     print("{:-<65} {}".format(tweet, str(vs)))
     
+    if vs['compound'] >= 0.05 :
+        print("Positive")
+    elif vs['compound'] <= - 0.05 :
+        print("Negative")
+    else :
+        print("Neutral") 
+    
+    
     
 data = pd.DataFrame(scores)
 final_dataset= pd.concat([df,data], axis=1)
