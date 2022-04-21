@@ -1,0 +1,19 @@
+Text = final_dataset.iloc[0,0] 
+for x in range(1,100):
+    Text = Text + " " +  final_dataset.iloc[x,0]
+    
+# Cleaning text and lower casing all words
+for char in '-.,\n':
+    Text=Text.replace(char,' ')
+Text = Text.lower()
+# split returns a list of words delimited by sequences of whitespace (including tabs, newlines, etc, like re's \s) 
+word_list = Text.split()
+
+# initializing a dictionary
+d = {};
+
+# counting number of times each word comes up in list of words
+for key in word_list: 
+    d[key] = d.get(key, 0) + 1
+
+sorted(d.items(), key = lambda x: x[1], reverse = True)
