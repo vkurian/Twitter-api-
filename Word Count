@@ -1,0 +1,50 @@
+import pandas as pd
+import numpy as np
+import nltk
+from nltk.corpus import stopwords
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+nltk.download('stopwords')
+
+stop_words = set(nltk.corpus.stopwords.words('english'))
+
+additional_stopwords = ['things', 'stuff', 'sure', 'make', 'think']
+
+for w in additional_stopwords:
+
+  stop_words.add(w)
+
+import gensim
+
+from gensim.utils import simple_preprocess
+
+word_counts = dict()
+
+for tweet in final_dataset[["tweets", "compound"]].values:
+
+  for token in simple_preprocess(tweet[0]):
+
+    if token not in stop_words:
+
+      if token not in word_counts:
+
+        word_counts[token] = [1, [tweet[1]]]
+
+      else:
+
+        word_counts[token][0] += 1
+
+        word_counts[token][1].append(tweet[1])
+        
+        for k, v in word_counts.items():
+
+  word_counts[k][1] = np.mean(v[1])
+  
+  sentiment_df = pd.DataFrame.from_dict(word_counts).transpose().rename({0:'Count', 1:'Sentiment'}, axis=1)
+  
+  sentiment_df.reset_index(inplace=True)
+  
+  sentiment_df.rename({'index':'Topic'},axis=1, inplace=True)
+  
+  sentiment_df.sort_values("Count",ascending=False)
