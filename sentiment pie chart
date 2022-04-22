@@ -1,0 +1,10 @@
+labels = ['Positive ['+str(positive)+'%]', 'Negative ['+str(negative)+'%]', 
+'Neutral ['+str(neutral)+'%]']
+sizes = [positive, negative, neutral]
+colors = ['green', 'red','black']
+patches, texts = plt.pie(sizes, colors=colors, startangle=90)
+plt.legend(patches,labels,loc="best")
+plt.title("Sentiment Pie Chart")
+plt.axis('equal')
+plt.tight_layout()
+plt.show()
