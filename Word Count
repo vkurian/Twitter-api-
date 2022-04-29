@@ -47,4 +47,10 @@ for tweet in final_dataset[["tweets", "compound"]].values:
   
   sentiment_df.rename({'index':'Topic'},axis=1, inplace=True)
   
-  sentiment_df.sort_values("Count",ascending=False)
+  Y=sentiment_df.sort_values("Count",ascending=False)
+  
+  Y.head(10).sort_values("Sentiment",ascending=True)
+  
+  Y.iloc[0,0]
+  
+  Y.plot(x = 'Topic', y = 'Count', kind = 'bar')
