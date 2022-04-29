@@ -1,0 +1,12 @@
+#if it is positve negative or neutral
+final_dataset['sentiment'] = ' '
+
+for x in range(100):
+    if final_dataset.iloc[x,7] < 0:
+        final_dataset.iloc[x,8] = 'negative'
+    elif final_dataset.iloc[x,7] > 0:
+        final_dataset.iloc[x,8] = 'positve'
+    else:
+        final_dataset.iloc[x,8] = 'neutral'
+        
+final_dataset
