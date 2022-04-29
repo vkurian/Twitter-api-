@@ -1,5 +1,6 @@
 #pip install openpyxl
-#using the blob file
+#import numpy as np
+#using the blob file ^ forgot to add numpy before
 
 #defined df to the pandas dataframe to the table final_dataset that was in the blob file.
 df =pd.DataFrame(final_dataset)
